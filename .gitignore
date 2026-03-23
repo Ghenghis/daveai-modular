@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+.next/
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Secrets
+shared/secrets/
+!shared/secrets/.env.example
+
+# Database
+shared/data/*.db
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+
+# Build artifacts
+dist/
+build/
+
+# Docker volumes
+volumes/
+
+# Backups (large)
+backups/
+
+# Videos (use Git LFS)
+# containers/frontend/intros/*.mp4
