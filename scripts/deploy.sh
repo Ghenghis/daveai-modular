@@ -3,11 +3,13 @@ set -euo pipefail
 
 # ═══════════════════════════════════════════════════════════
 #  Deploy VPS3 to Production VPS
+#  GitHub: https://github.com/Ghenghis/daveai-modular
 # ═══════════════════════════════════════════════════════════
 
 VPS_IP="187.77.30.206"
 VPS_USER="root"
 DEPLOY_PATH="/opt/daveai-vps3"
+GITHUB_REPO="https://github.com/Ghenghis/daveai-modular.git"
 
 echo "═══════════════════════════════════════════════════════════"
 echo "  DaveAI VPS3 Deployment Script"

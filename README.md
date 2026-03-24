@@ -3,6 +3,8 @@
 > **VPS2**: Clean 1:1 backup of current production site  
 > **VPS3**: New modular Docker-based architecture with fault isolation
 
+**GitHub**: https://github.com/Ghenghis/daveai-modular
+
 ---
 
 ## Quick Start
@@ -12,11 +14,16 @@
 - Git
 - `G:\github\PixelPaw` cloned (for PixelPaw builder container)
 
+### Clone Repository
+
+```bash
+git clone https://github.com/Ghenghis/daveai-modular.git
+cd daveai-modular
+```
+
 ### Launch All Services
 
 ```bash
-cd G:\github\VPS3
-
 # Start all containers
 docker compose up -d
 
@@ -29,13 +36,13 @@ docker compose ps
 
 ### Access Services
 
-| Service | URL | Purpose |
-|---|---|---|
-| **Frontend** | http://localhost | Main website |
-| **Agent Brain API** | http://localhost/api | Backend API |
-| **TTS** | http://localhost/api/tts | Voice synthesis |
-| **PixelPaw Downloads** | http://localhost/downloads | Extension .vsix |
-| **LiteLLM** | http://localhost:4000 | LLM router (internal) |
+| Service                | URL                        | Purpose               |
+| ---------------------- | -------------------------- | --------------------- |
+| **Frontend**           | http://localhost           | Main website          |
+| **Agent Brain API**    | http://localhost/api       | Backend API           |
+| **TTS**                | http://localhost/api/tts   | Voice synthesis       |
+| **PixelPaw Downloads** | http://localhost/downloads | Extension .vsix       |
+| **LiteLLM**            | http://localhost:4000      | LLM router (internal) |
 
 ---
 
