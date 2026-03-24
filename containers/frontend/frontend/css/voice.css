@@ -1,0 +1,870 @@
+/* DaveAI v7 - voice.css */
+
+       Voice narration works seamlessly during gameplay.
+       ══════════════════════════════════════════════════════════ */
+
+    /* Game voice indicator — pulsing mic icon during TTS in game mode */
+    #game-voice-indicator {
+      display: none;
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      z-index: 12;
+      background: rgba(10, 13, 24, .8);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(16, 185, 129, .3);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 9px;
+      color: #6EE7B7;
+      gap: 5px;
+      align-items: center;
+      animation: demoFadeIn .3s ease;
+    }
+
+    #game-voice-indicator.active {
+      display: flex;
+    }
+
+    #game-voice-indicator i {
+      animation: demoPulse 1.5s ease-in-out infinite;
+    }
+
+       VOICE STUDIO — Professional TTS Control Panel
+    #voice-studio-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, .7);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    #voice-studio-overlay.open {
+      display: flex;
+    }
+
+    #voice-studio {
+      width: 720px;
+      max-width: 96vw;
+      max-height: 88vh;
+      background: linear-gradient(135deg, rgba(15, 17, 28, .98), rgba(20, 22, 38, .98));
+      border: 1px solid rgba(147, 51, 234, .25);
+      border-radius: 16px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .6), 0 0 40px rgba(147, 51, 234, .1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vs-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .vs-header h2 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--t1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .vs-header h2 i {
+      color: #A78BFA;
+      font-size: 14px;
+    }
+
+    .vs-header .vs-close {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .06);
+      border: none;
+      color: var(--t3);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .15s;
+    }
+
+    .vs-header .vs-close:hover {
+      background: rgba(239, 68, 68, .2);
+      color: #FCA5A5;
+    }
+
+    /* Voice Studio Tabs */
+    .vs-tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .vs-tab {
+      padding: 10px 16px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--t3);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all .15s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .vs-tab:hover {
+      color: var(--t2);
+    }
+
+    .vs-tab.on {
+      color: #D8B4FE;
+      border-bottom-color: #7C3AED;
+    }
+
+    .vs-tab i {
+      font-size: 10px;
+    }
+
+    /* Voice Studio Body */
+    .vs-pane {
+      display: none;
+    }
+
+    .vs-pane.on {
+      display: block;
+    }
+
+    /* Voice Cards */
+    .vs-voice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .vs-voice-card {
+      padding: 12px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .06);
+      transition: all .2s;
+      position: relative;
+    }
+
+    .vs-voice-card:hover {
+      background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .12);
+    }
+
+    .vs-voice-card.selected {
+      background: rgba(147, 51, 234, .12);
+      border-color: rgba(147, 51, 234, .4);
+      box-shadow: 0 0 16px rgba(147, 51, 234, .15);
+    }
+
+    .vs-voice-card .vc-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--t1);
+      margin-bottom: 2px;
+    }
+
+    .vs-voice-card .vc-desc {
+      font-size: 9.5px;
+      color: var(--t3);
+      line-height: 1.3;
+    }
+
+    .vs-voice-card .vc-grade {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 8px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .vc-grade.a {
+      background: rgba(34, 197, 94, .2);
+      color: #6EE7B7;
+    }
+
+    .vc-grade.b {
+      background: rgba(59, 130, 246, .2);
+      color: #93C5FD;
+    }
+
+    .vc-grade.c {
+      background: rgba(251, 191, 36, .2);
+      color: #FCD34D;
+    }
+
+    .vc-grade.d {
+      background: rgba(156, 163, 175, .2);
+      color: #9CA3AF;
+    }
+
+    /* Gender/Accent Tabs inside voice pane */
+    .vs-filter-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .vs-filter-btn {
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 9.5px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .08);
+      color: var(--t3);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .vs-filter-btn:hover {
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .vs-filter-btn.on {
+      background: rgba(147, 51, 234, .2);
+      border-color: rgba(147, 51, 234, .4);
+      color: #D8B4FE;
+    }
+
+    /* Sliders */
+    .vs-slider-group {
+      margin-bottom: 14px;
+    }
+
+    .vs-slider-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: var(--t3);
+      margin-bottom: 5px;
+    }
+
+    .vs-slider-label .vs-val {
+      color: #D8B4FE;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .vs-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, .08);
+      outline: none;
+      transition: background .15s;
+    }
+
+    .vs-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #7C3AED;
+      border: 2px solid #D8B4FE;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(124, 58, 237, .4);
+      transition: all .15s;
+    }
+
+    .vs-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 14px rgba(124, 58, 237, .6);
+    }
+
+    .vs-slider::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #7C3AED;
+      border: 2px solid #D8B4FE;
+      cursor: pointer;
+    }
+
+    /* Waveform Visualizer */
+    .vs-waveform {
+      width: 100%;
+      height: 60px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, .3);
+      border: 1px solid rgba(255, 255, 255, .06);
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vs-waveform .wf-status {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: var(--t3);
+      pointer-events: none;
+    }
+
+    /* Voice Blend */
+    .vs-blend-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .vs-blend-row select {
+      flex: 1;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid var(--border);
+      color: var(--t1);
+      padding: 6px 8px;
+      border-radius: 5px;
+      font-size: 10px;
+      font-family: inherit;
+    }
+
+    .vs-blend-row select:focus {
+      outline: none;
+      border-color: rgba(147, 51, 234, .5);
+    }
+
+    .vs-blend-weight {
+      width: 50px;
+      text-align: center;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid var(--border);
+      color: #D8B4FE;
+      padding: 5px;
+      border-radius: 5px;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: inherit;
+    }
+
+    /* EQ Bars */
+    .vs-eq-row {
+      display: flex;
+      gap: 14px;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 12px 0;
+      margin-bottom: 14px;
+    }
+
+    .vs-eq-band {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .vs-eq-band input[type="range"] {
+      -webkit-appearance: slider-vertical;
+      appearance: slider-vertical;
+      writing-mode: bt-lr;
+      width: 20px;
+      height: 80px;
+    }
+
+    .vs-eq-band label {
+      font-size: 8px;
+      color: var(--t3);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* Preset Cards */
+    .vs-preset-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .vs-preset-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .06);
+      transition: all .15s;
+      cursor: pointer;
+    }
+
+    .vs-preset-card:hover {
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .vs-preset-card.active {
+      border-color: rgba(147, 51, 234, .4);
+      background: rgba(147, 51, 234, .08);
+    }
+
+    .vs-preset-card .vp-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .vs-preset-card .vp-icon.male {
+      background: rgba(59, 130, 246, .15);
+      color: #93C5FD;
+    }
+
+    .vs-preset-card .vp-icon.female {
+      background: rgba(236, 72, 153, .15);
+      color: #F9A8D4;
+    }
+
+    .vs-preset-card .vp-info {
+      flex: 1;
+    }
+
+    .vs-preset-card .vp-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--t1);
+    }
+
+    .vs-preset-card .vp-meta {
+      font-size: 9px;
+      color: var(--t3);
+    }
+
+    .vs-preset-card .vp-actions {
+      display: flex;
+      gap: 4px;
+    }
+
+    .vs-preset-card .vp-actions button {
+      width: 26px;
+      height: 26px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, .05);
+      border: none;
+      color: var(--t3);
+      cursor: pointer;
+      font-size: 9px;
+      transition: all .15s;
+    }
+
+    .vs-preset-card .vp-actions button:hover {
+      background: rgba(255, 255, 255, .12);
+      color: var(--t1);
+    }
+
+    /* Test Area */
+    .vs-test-area {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .vs-test-input {
+      flex: 1;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid var(--border);
+      color: var(--t1);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-family: inherit;
+      resize: none;
+      min-height: 36px;
+    }
+
+    .vs-test-input:focus {
+      outline: none;
+      border-color: rgba(147, 51, 234, .5);
+    }
+
+    .vs-test-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #7C3AED, #9333EA);
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+
+    .vs-test-btn:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+    }
+
+    .vs-test-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      transform: none;
+      filter: none;
+    }
+
+    .vs-test-btn.playing {
+      background: linear-gradient(135deg, #DC2626, #EF4444);
+    }
+
+    .vs-section-title {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--t3);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .vs-section-title i {
+      font-size: 9px;
+      color: #A78BFA;
+    }
+
+    .vs-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, .06);
+      margin: 16px 0;
+    }
+
+    /* Footer Actions */
+    .vs-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .vs-footer-status {
+      font-size: 9px;
+      color: var(--t3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .vs-footer-status .vs-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .vs-footer-status .vs-dot.online {
+      background: #22C55E;
+      box-shadow: 0 0 6px rgba(34, 197, 94, .5);
+    }
+
+    .vs-footer-status .vs-dot.warn {
+      background: #F59E0B;
+      box-shadow: 0 0 6px rgba(245, 158, 11, .5);
+    }
+
+    .vs-footer-status .vs-dot.offline {
+      background: #EF4444;
+    }
+
+    .vs-footer-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .vs-footer-actions button {
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .vs-btn-save {
+      background: rgba(147, 51, 234, .25);
+      border: 1px solid rgba(147, 51, 234, .4);
+      color: #D8B4FE;
+    }
+
+    .vs-btn-save:hover {
+      background: rgba(147, 51, 234, .4);
+    }
+
+    .vs-btn-export {
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .08);
+      color: var(--t3);
+    }
+
+    .vs-btn-export:hover {
+      background: rgba(255, 255, 255, .1);
+      color: var(--t1);
+    }
+
+    #dv-voice-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      margin: 0 8px 2px;
+      background: rgba(147, 51, 234, .08);
+      border: 1px solid rgba(147, 51, 234, .15);
+      border-radius: 8px;
+      font-size: 10px;
+      color: var(--t3);
+      transition: all .2s;
+    }
+
+    #dv-voice-bar:hover {
+      background: rgba(147, 51, 234, .14);
+    }
+
+    #dv-voice-bar .dvb-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    #dv-voice-bar .dvb-dot.on {
+      background: #4ade80;
+      box-shadow: 0 0 5px rgba(74, 222, 128, .5);
+    }
+
+    #dv-voice-bar .dvb-dot.warn {
+      background: #fbbf24;
+    }
+
+    #dv-voice-bar .dvb-dot.off {
+      background: #ef4444;
+    }
+
+    #dv-voice-bar .dvb-engine {
+      font-weight: 600;
+      color: var(--t2);
+      cursor: pointer;
+    }
+
+    #dv-voice-bar .dvb-voice {
+      color: #D8B4FE;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(147, 51, 234, .12);
+    }
+
+    #dv-voice-bar .dvb-voice:hover {
+      background: rgba(147, 51, 234, .25);
+    }
+
+    #dv-voice-bar .dvb-btn {
+      padding: 2px 6px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      background: rgba(255, 255, 255, .06);
+      color: var(--t3);
+      font-size: 10px;
+      font-family: inherit;
+      transition: all .15s;
+    }
+
+    #dv-voice-bar .dvb-btn:hover {
+      background: rgba(255, 255, 255, .12);
+      color: var(--t1);
+    }
+
+    #dv-voice-bar .dvb-btn.active {
+      background: rgba(147, 51, 234, .2);
+      color: #D8B4FE;
+    }
+
+    #dv-voice-bar .dvb-sep {
+      width: 1px;
+      height: 14px;
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .dvb-speaking {
+      animation: dvbPulse 1s infinite;
+      background: rgba(147, 51, 234, .18) !important;
+      box-shadow: 0 0 12px rgba(147, 51, 234, .15);
+    }
+
+    /* Voice name + engine label */
+    .dv-speak-info {
+      width: 80px;
+      flex-shrink: 0;
+      padding: 0 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .dv-speak-name {
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 72px;
+    }
+
+    .dv-speak-name.female {
+      color: #F472B6;
+    }
+
+    .dv-speak-name.male {
+      color: #60A5FA;
+    }
+
+    .dv-speak-engine {
+      font-size: 8px;
+      color: var(--t3);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    /* Glow ring animation around mouth when speaking */
+    /* ── Quick Voice Picker Popup ── */
+    #dv-voice-picker {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      right: 0;
+      max-height: 220px;
+      overflow-y: auto;
+      margin-bottom: 4px;
+      background: rgba(15, 10, 30, .97);
+      border: 1px solid rgba(147, 51, 234, .2);
+      border-radius: 10px;
+      padding: 6px;
+      z-index: 999;
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, .5);
+    }
+
+    #dv-voice-picker.open {
+      display: block;
+    }
+
+    .dvp-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 10px;
+      color: var(--t2);
+      transition: all .12s;
+    }
+
+    .dvp-item:hover {
+      background: rgba(147, 51, 234, .15);
+    }
+
+    .dvp-item.selected {
+      background: rgba(147, 51, 234, .2);
+      border: 1px solid rgba(147, 51, 234, .3);
+    }
+
+    .dvp-item .dvp-name {
+      font-weight: 600;
+    }
+
+    .dvp-item .dvp-meta {
+      color: var(--t3);
+      font-size: 9px;
+    }
+
+    .dvp-item .dvp-grade {
+      font-size: 8px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-left: auto;
+    }
+
+    @media (max-width:640px) {
+      #voice-studio {
+        width: 98vw;
+        max-height: 95vh;
+        border-radius: 12px;
+      }
+
+      .vs-voice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .vs-tabs {
+        overflow-x: auto;
+      }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       IMMERSIVE PROJECT VIEW
+    .app-mode.app-hide-voice #dv-voice-bar {
+      display: none !important;
+    }
+
+    .app-mode #dv-voice-bar {
+      padding: 2px 8px;
+      font-size: 9px;
+      min-height: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+    }
+
+    .app-mode #cb {
+      padding: 4px 8px;
+      gap: 5px;
+    }
+
+    .app-mode #cb textarea {
+      font-size: 12px;
+      max-height: 40px;
+      min-height: 18px;
+      padding: 3px 8px;
+      line-height: 1.3;
+    }
+

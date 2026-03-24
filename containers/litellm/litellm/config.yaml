@@ -1,0 +1,100 @@
+model_list:
+  # ══════════════════════════════════════════════════════════════════════════════
+  # HEAVY-CODER: complex coding tasks, planning, multi-file changes
+  # ══════════════════════════════════════════════════════════════════════════════
+
+  # 1st: LM Studio local (free, fast when PC online)
+  - model_name: heavy-coder
+    litellm_params:
+      model: openai/zai-org/glm-4.7-flash
+      api_base: http://100.117.190.97:1234/v1
+      api_key: lm-studio
+      timeout: 300
+
+  # 2nd: Kimi K2.5 — top coding model, 262k ctx, $0.23/$3.00 per 1M
+  - model_name: heavy-coder
+    litellm_params:
+      model: openrouter/moonshotai/kimi-k2.5
+      api_base: https://openrouter.ai/api/v1
+      api_key: os.environ/OPENROUTER_API_KEY
+      timeout: 300
+      extra_headers:
+        HTTP-Referer: https://daveai.tech
+        X-Title: DaveAI Agent Brain
+
+  # ══════════════════════════════════════════════════════════════════════════════
+  # FAST-AGENT: quick chat, summaries, simple tasks
+  # ══════════════════════════════════════════════════════════════════════════════
+
+  # 1st: LM Studio local
+  - model_name: fast-agent
+    litellm_params:
+      model: openai/zai-org/glm-4.7-flash
+      api_base: http://100.117.190.97:1234/v1
+      api_key: lm-studio
+      timeout: 120
+
+  # 2nd: GLM 4.7 Flash via OpenRouter — $0.06/$0.40 per 1M, 202k ctx
+  - model_name: fast-agent
+    litellm_params:
+      model: openrouter/z-ai/glm-4.7-flash
+      api_base: https://openrouter.ai/api/v1
+      api_key: os.environ/OPENROUTER_API_KEY
+      timeout: 120
+      extra_headers:
+        HTTP-Referer: https://daveai.tech
+        X-Title: DaveAI Agent Brain
+
+  # 3rd: GLM 4.5 Air FREE — 131k ctx, zero cost fallback
+  - model_name: fast-agent
+    litellm_params:
+      model: openrouter/z-ai/glm-4.5-air:free
+      api_base: https://openrouter.ai/api/v1
+      api_key: os.environ/OPENROUTER_API_KEY
+      timeout: 120
+      extra_headers:
+        HTTP-Referer: https://daveai.tech
+        X-Title: DaveAI Agent Brain
+
+  # ══════════════════════════════════════════════════════════════════════════════
+  # VISION: image analysis, screenshots
+  # ══════════════════════════════════════════════════════════════════════════════
+
+  - model_name: vision
+    litellm_params:
+      model: openai/zai-org/glm-4.7-flash
+      api_base: http://100.117.190.97:1234/v1
+      api_key: lm-studio
+      timeout: 120
+
+  - model_name: vision
+    litellm_params:
+      model: openrouter/meta-llama/llama-4-scout
+      api_base: https://openrouter.ai/api/v1
+      api_key: os.environ/OPENROUTER_API_KEY
+      timeout: 120
+      extra_headers:
+        HTTP-Referer: https://daveai.tech
+        X-Title: DaveAI Agent Brain
+
+router_settings:
+  routing_strategy: latency-based-routing
+  num_retries: 3
+  retry_after: 3
+  fallbacks:
+    - {"heavy-coder": ["fast-agent"]}
+    - {"fast-agent": ["heavy-coder"]}
+    - {"vision": ["fast-agent"]}
+
+litellm_settings:
+  drop_params: true
+  request_timeout: 120
+  success_callback: []
+  failure_callback: []
+
+general_settings:
+  completion_model: heavy-coder
+  max_budget: 50.0
+  budget_duration: 30d
+  background_health_checks: false
+  health_check_interval: 3600

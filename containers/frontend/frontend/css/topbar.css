@@ -1,0 +1,273 @@
+/* DaveAI v7 - topbar.css */
+
+    /* ══ TOP BAR ══ */
+    #topbar {
+      height: 46px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      gap: 6px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(3, 8, 18, 0.95);
+      backdrop-filter: blur(22px);
+      flex-shrink: 0;
+      z-index: 50;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: var(--grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--fd);
+      font-weight: 800;
+      font-size: 12px;
+      color: white;
+      box-shadow: 0 0 16px var(--sv-g);
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-family: var(--fd);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--t1);
+    }
+
+    .vdiv {
+      width: 1px;
+      height: 18px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    /* Build status bar */
+    #bst {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 4px 12px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #6EE7B7;
+      background: rgba(5, 150, 105, .1);
+      border-top: 1px solid rgba(5, 150, 105, .15);
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Panel content */
+    .panel-content {
+      flex: 1;
+      overflow-y: auto;
+      display: none;
+      flex-direction: column;
+      animation: panelFadeIn .2s ease;
+    }
+
+    .panel-content.vis {
+      display: flex !important;
+    }
+
+    .immersive #topbar,
+    .immersive #sb-wrap,
+    .immersive #lsb,
+    .immersive #pp,
+    .immersive #rp,
+    .immersive #topbar {
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: translateY(-100%);
+      height: 42px;
+    }
+
+    .immersive #sb-wrap {
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: translateY(-100%);
+    }
+
+    .immersive #lsb {
+      top: 0;
+      left: 0;
+      bottom: 0;
+      transform: translateX(-100%);
+      width: 48px;
+    }
+
+    .immersive #pp {
+      transform: translateX(-100%);
+    }
+
+    .immersive #rp {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      transform: translateX(100%);
+      width: 268px;
+      border-left: 1px solid var(--border);
+    }
+
+    .immersive.edge-top #topbar {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+      position: fixed;
+      width: 100%;
+    }
+
+    .immersive.edge-left #lsb {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+      position: fixed;
+      height: 100vh;
+      background: var(--bg);
+    }
+
+    .immersive.edge-right #rp {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+      position: fixed;
+      height: 100vh;
+      background: rgba(4, 8, 20, 0.95);
+    }
+
+    .app-mode #topbar,
+    .app-mode #sb-wrap,
+    .app-mode #lsb,
+    .app-mode #pp,
+    .app-mode #pp-pull-tab,
+    .app-mode #rp,
+    .app-mode #ctb,
+    .app-mode #sugs,
+    .app-mode #tc,
+    .app-mode .frame-chrome,
+    .app-mode .btb,
+    .app-mode .edge-zone,
+    .app-mode .immersive-enter,
+    .app-mode .immersive-exit {
+      display: none !important;
+    }
+
+    /* Togglable sub-elements: hide when their toggle is off */
+    .app-mode.app-hide-status #ts {
+      display: none !important;
+    }
+
+      #topbar {
+        padding: 0 6px;
+        gap: 4px;
+      }
+
+      .tb-right {
+        gap: 2px;
+      }
+
+      #tb-clock {
+        display: none !important;
+      }
+
+      #pp {
+        width: 220px;
+      }
+
+      #bframe {
+        margin: 4px 4px 0;
+      }
+
+      .dm-desktop #bframe {
+        margin: 4px 4px 0;
+      }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       RESPONSIVE — MOBILE (S21 Ultra, ≤600px)
+       ══════════════════════════════════════════════════════════ */
+    @media (max-width: 600px) {
+
+      /* Hide sidebar rail on mobile — too narrow */
+      #lsb {
+        display: none;
+      }
+
+      /* Show mobile menu button */
+      #mobile-menu-btn {
+        display: block !important;
+      }
+
+      #topbar {
+        height: 40px;
+        padding: 0 6px;
+        gap: 3px;
+      }
+
+      .logo-text {
+        display: none;
+      }
+
+      /* Status bar: hide on mobile to save space */
+      #sb-wrap {
+        height: 20px;
+      }
+
+      #sb-wrap>div:first-child {
+        padding: 0 6px;
+      }
+
+      #sb-wrap>div:first-child span:last-child {
+        display: none;
+      }
+
+      #sb-ts {
+        display: none;
+      }
+
+      #topbar {
+        height: 36px;
+      }
+
+      .logo-icon {
+        width: 22px;
+        height: 22px;
+        font-size: 10px;
+      }
+
+      .panel-tabs .ptab {
+        padding: 2px 4px;
+        font-size: 8px;
+      }
+
+      .avatar {
+        width: 24px;
+        height: 24px;
+        font-size: 9px;
+      }
+
+      #sb-wrap {
+        display: none;
+      }
+
+      #pc {
+        padding: 16px 8px 12px;
+      }
+
+      .p-title {
+        font-size: 18px;
+      }
+    }

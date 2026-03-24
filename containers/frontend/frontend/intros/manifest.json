@@ -1,0 +1,18 @@
+{
+  "default": "/intros/fe-male-intro.mp4",
+  "intros": [
+    {
+      "file": "/intros/fe-male-intro.mp4",
+      "gender": "neutral",
+      "default": true
+    },
+    {
+      "file": "/intros/female-intro.mp4",
+      "gender": "female"
+    },
+    {
+      "file": "/intros/male-intro.mp4",
+      "gender": "male"
+    }
+  ]
+}
