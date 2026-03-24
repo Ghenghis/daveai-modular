@@ -1,0 +1,25 @@
+# docker-compose.test.yml
+# Local test override — runs CORE services only, no API keys needed
+# Usage: docker compose -f docker-compose.yml -f docker-compose.test.yml up -d
+
+services:
+
+  # Override nginx to not block on all services being healthy
+  nginx:
+    depends_on:
+      - frontend
+      - agent-brain
+      - edge-tts
+
+  # Disable heavy/non-essential services for local testing
+  litellm:
+    profiles: ["full"]
+
+  agentic-ui:
+    profiles: ["full"]
+
+  backup-agent:
+    profiles: ["full"]
+
+  pixelpaw-builder:
+    profiles: ["full"]

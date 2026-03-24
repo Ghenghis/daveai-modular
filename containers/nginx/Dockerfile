@@ -12,8 +12,11 @@ RUN apk add --no-cache \
 # Remove default config
 RUN rm /etc/nginx/conf.d/default.conf
 
-# Copy nginx configs
-COPY nginx/*.conf /etc/nginx/conf.d/
+# Copy main nginx.conf (replaces system default)
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
+# Copy site config
+COPY daveai.tech.conf /etc/nginx/conf.d/daveai.tech.conf
 
 # Create SSL directory
 RUN mkdir -p /etc/letsencrypt

@@ -18,8 +18,8 @@ RUN pip install --no-cache-dir \
     pydantic \
     aiohttp
 
-# Copy TTS server
-COPY edge-tts/edge-tts-server.py .
+# Copy TTS server (renamed to valid Python module name)
+COPY edge-tts/edge-tts-server.py ./tts_server.py
 
 EXPOSE 5050
 
@@ -28,4 +28,4 @@ HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
     CMD curl -f http://localhost:5050/api/health || exit 1
 
 # Start server
-CMD ["uvicorn", "edge-tts-server:app", "--host", "0.0.0.0", "--port", "5050"]
+CMD ["uvicorn", "tts_server:app", "--host", "0.0.0.0", "--port", "5050"]

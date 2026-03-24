@@ -33,10 +33,10 @@ services:
         condition: service_healthy
       edge-tts:
         condition: service_healthy
-    networks: [daveai-net]
+    networks: [ daveai-net ]
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://localhost/health"]
+      test: [ "CMD", "curl", "-sf", "http://localhost/health" ]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -46,10 +46,10 @@ services:
   frontend:
     build: ./containers/frontend
     container_name: daveai-frontend
-    networks: [daveai-net]
+    networks: [ daveai-net ]
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://localhost:8080/"]
+      test: [ "CMD", "curl", "-sf", "http://localhost:8080/" ]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -60,12 +60,12 @@ services:
     build: ./containers/agent-brain
     container_name: daveai-brain
     env_file: ./shared/secrets/.env.brain
-    networks: [daveai-net]
+    networks: [ daveai-net ]
     volumes:
       - brain-data:/app/data
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://localhost:8888/api/health"]
+      test: [ "CMD", "curl", "-sf", "http://localhost:8888/api/health" ]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -75,10 +75,10 @@ services:
   edge-tts:
     build: ./containers/edge-tts
     container_name: daveai-tts
-    networks: [daveai-net]
+    networks: [ daveai-net ]
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://localhost:5050/api/health"]
+      test: [ "CMD", "curl", "-sf", "http://localhost:5050/api/health" ]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -89,10 +89,10 @@ services:
     build: ./containers/litellm
     container_name: daveai-litellm
     env_file: ./shared/secrets/.env.litellm
-    networks: [daveai-net]
+    networks: [ daveai-net ]
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://localhost:4000/v1/models"]
+      test: [ "CMD", "curl", "-sf", "http://localhost:4000/v1/models" ]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -101,10 +101,10 @@ services:
   serve-api:
     build: ./containers/serve-api
     container_name: daveai-serve
-    networks: [daveai-net]
+    networks: [ daveai-net ]
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://localhost:8090/api/games"]
+      test: [ "CMD", "curl", "-sf", "http://localhost:8090/api/games" ]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -113,10 +113,10 @@ services:
   agentic-ui:
     build: ./containers/agentic-ui
     container_name: daveai-ui
-    networks: [daveai-net]
+    networks: [ daveai-net ]
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://localhost:3001/"]
+      test: [ "CMD", "curl", "-sf", "http://localhost:3001/" ]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -128,23 +128,23 @@ services:
     volumes:
       - brain-data:/data/brain:ro
       - backup-data:/backups
-    networks: [daveai-net]
+    networks: [ daveai-net ]
     restart: unless-stopped
 
   # ── 9. PIXELPAW BUILDER ───────────────────────────────
   pixelpaw-builder:
     build: ./containers/pixelpaw-builder
     container_name: daveai-pixelpaw-builder
-    networks: [daveai-net]
+    networks: [ daveai-net ]
     volumes:
       # Mount PixelPaw source from G:\github\PixelPaw
-      - ../../PixelPaw:/source:ro
+      - ../PixelPaw:/source:ro
       # Persistent builds
       - pixelpaw-builds:/app/public
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://localhost:8085/"]
+      test: [ "CMD", "curl", "-sf", "http://localhost:8085/" ]
       interval: 60s
       timeout: 5s
       retries: 3
-      start_period: 120s  # Build takes time
+      start_period: 120s # Build takes time
